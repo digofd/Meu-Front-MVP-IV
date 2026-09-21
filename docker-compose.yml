@@ -1,0 +1,10 @@
+name: skyroute-web
+
+services:
+  web:
+    build:
+      context: .
+      args:
+        VITE_API_URL: http://localhost:8010
+    ports:
+      - "8020:80"

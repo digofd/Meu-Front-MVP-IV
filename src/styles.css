@@ -1,0 +1,278 @@
+:root {
+  --fundo: #0b1220;
+  --superficie: #131c2e;
+  --superficie-2: #1b2740;
+  --borda: #26334d;
+  --texto: #e8edf7;
+  --texto-fraco: #94a3b8;
+  --primaria: #38bdf8;
+  --verde: #34d399;
+  --vermelho: #f87171;
+  --ambar: #fbbf24;
+  --cinza: #94a3b8;
+  --raio: 12px;
+  --sombra: 0 8px 24px rgba(0, 0, 0, 0.35);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 600px at 80% -10%, #1e293b 0%, transparent 60%),
+    var(--fundo);
+  color: var(--texto);
+  font: 15px/1.55 'Segoe UI', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+.container { max-width: 1180px; margin: 0 auto; padding: 24px 20px 64px; }
+
+/* ---------- cabeçalho ---------- */
+header.topo {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  padding: 20px 0 24px; border-bottom: 1px solid var(--borda); margin-bottom: 28px;
+}
+.marca { display: flex; align-items: center; gap: 12px; }
+.marca .logo {
+  width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--primaria), #6366f1); font-size: 22px;
+}
+.marca h1 { margin: 0; font-size: 21px; letter-spacing: -0.3px; }
+.marca p { margin: 2px 0 0; color: var(--texto-fraco); font-size: 13px; }
+.saude { margin-left: auto; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--texto-fraco); }
+.ponto { width: 9px; height: 9px; border-radius: 50%; background: var(--cinza); }
+.ponto.ok { background: var(--verde); box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.15); }
+.ponto.erro { background: var(--vermelho); box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.15); }
+
+/* ---------- cartões e grade ---------- */
+.painel {
+  background: var(--superficie); border: 1px solid var(--borda);
+  border-radius: var(--raio); padding: 20px; box-shadow: var(--sombra);
+}
+.painel h2 { margin: 0 0 16px; font-size: 15px; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--texto-fraco); }
+/* Lista e detalhe lado a lado; sem align-items, o padrão do grid stretch faz
+   os dois esticarem para a altura do mais alto da linha. */
+.grade-detalhe { display: grid; grid-template-columns: 340px 1fr; gap: 20px; margin-top: 20px; }
+.grade-detalhe > .painel { height: 100%; }
+.coluna { display: grid; gap: 20px; }
+@media (max-width: 900px) { .grade-detalhe { grid-template-columns: 1fr; } }
+
+/* ---------- barra "Nova rota" ---------- */
+.barra-rota { margin-top: 0; }
+.linha-campos-rota { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
+.linha-campos-rota .campo-icao { flex: 0 0 200px; margin-bottom: 0; }
+.linha-campos-rota button { flex: 1 1 220px; height: 42px; }
+
+/* ---------- formulário ---------- */
+.campo { display: grid; gap: 6px; margin-bottom: 14px; }
+.campo label { font-size: 12px; color: var(--texto-fraco); text-transform: uppercase; letter-spacing: 0.06em; }
+input, select {
+  background: var(--superficie-2); border: 1px solid var(--borda); color: var(--texto);
+  padding: 10px 12px; border-radius: 9px; font: inherit; width: 100%;
+}
+input:focus, select:focus { outline: 2px solid var(--primaria); outline-offset: 1px; border-color: transparent; }
+input::placeholder { color: #64748b; }
+.dupla { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+button {
+  background: var(--primaria); color: #062033; border: 0; padding: 10px 16px;
+  border-radius: 9px; font: 600 14px/1 inherit; cursor: pointer; transition: filter .15s, opacity .15s;
+}
+button:hover:not(:disabled) { filter: brightness(1.08); }
+button:disabled { opacity: .5; cursor: not-allowed; }
+button.secundario { background: var(--superficie-2); color: var(--texto); border: 1px solid var(--borda); }
+button.perigo { background: transparent; color: var(--vermelho); border: 1px solid rgba(248,113,113,.35); }
+button.perigo:hover:not(:disabled) { background: rgba(248, 113, 113, 0.12); }
+button.largo { width: 100%; }
+button.pequeno { padding: 6px 11px; font-size: 12.5px; }
+
+/* ---------- lista de rotas ---------- */
+.rota {
+  background: var(--superficie-2); border: 1px solid var(--borda); border-left: 4px solid var(--cinza);
+  border-radius: 10px; padding: 14px 16px; display: grid; gap: 10px; cursor: pointer;
+  transition: transform .12s, border-color .12s;
+}
+.rota:hover { transform: translateX(2px); border-color: var(--primaria); }
+.rota.selecionada { border-color: var(--primaria); background: #1d2b45; }
+.rota.inativa { opacity: .62; }
+.rota-topo { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.par-icao { font: 700 17px/1 'Consolas', ui-monospace, monospace; letter-spacing: 1px; }
+.seta { color: var(--texto-fraco); }
+.meta { color: var(--texto-fraco); font-size: 12.5px; }
+.acoes { display: flex; gap: 8px; flex-wrap: wrap; }
+.lista { display: grid; gap: 10px; }
+
+/* ---------- selo de status ---------- */
+.selo {
+  display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px;
+  border-radius: 999px; font-size: 12px; font-weight: 600;
+  background: color-mix(in srgb, currentColor 14%, transparent);
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+}
+
+/* Selo com dica de condições operacionais (hoje só VFR Especial). */
+.selo-com-dica { position: relative; display: inline-flex; cursor: help; }
+.dica-operacional {
+  position: absolute; bottom: calc(100% + 8px); left: 0; z-index: 20;
+  width: 260px; padding: 10px 12px; border-radius: 10px;
+  background: var(--superficie-2); border: 1px solid var(--borda);
+  box-shadow: var(--sombra); font-size: 12px; font-weight: 400;
+  color: var(--texto-fraco); visibility: hidden; opacity: 0;
+  transform: translateY(4px); transition: opacity .12s ease, transform .12s ease;
+  pointer-events: none;
+}
+.dica-operacional strong { display: block; color: var(--texto); margin-bottom: 6px; font-weight: 600; }
+.dica-operacional ul { margin: 0; padding-left: 16px; }
+.dica-operacional li { margin-bottom: 3px; }
+.selo-com-dica:hover .dica-operacional,
+.selo-com-dica:focus-within .dica-operacional,
+.selo-com-dica:focus .dica-operacional { visibility: visible; opacity: 1; transform: translateY(0); }
+
+/* TEMPO/PROB do TAF em vigor no recebimento. */
+.aviso-temporario {
+  margin-left: 6px; cursor: help; color: var(--ambar);
+}
+
+/* ---------- painel de resumo ---------- */
+.numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.numero { background: var(--superficie-2); border: 1px solid var(--borda); border-radius: 10px; padding: 12px 14px; }
+.numero .valor { font-size: 24px; font-weight: 700; line-height: 1.1; }
+.numero .rotulo { font-size: 11.5px; color: var(--texto-fraco); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+
+.graficos { display: grid; grid-template-columns: 140px 1fr; gap: 24px; align-items: center; }
+@media (max-width: 620px) { .graficos { grid-template-columns: 1fr; } }
+.rosca { position: relative; display: grid; place-items: center; }
+.rosca-centro { position: absolute; text-align: center; }
+.rosca-centro .pct { font-size: 21px; font-weight: 700; }
+.rosca-centro .txt { font-size: 10.5px; color: var(--texto-fraco); text-transform: uppercase; }
+
+.barras { display: grid; gap: 10px; }
+.barra-linha { display: grid; grid-template-columns: 150px 1fr 34px; align-items: center; gap: 10px; font-size: 13px; }
+.barra-trilho { background: var(--superficie-2); border-radius: 999px; height: 9px; overflow: hidden; }
+.barra-preenchida { height: 100%; border-radius: 999px; transition: width .4s ease; }
+
+/* ---------- alternância simplificada / completa ---------- */
+.cabecalho-secao { display: flex; align-items: center; gap: 12px; margin-top: 24px; }
+.cabecalho-secao h2 { margin: 0; }
+.chave-linha { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.chave {
+  width: 44px; height: 24px; border-radius: 999px; padding: 0; position: relative;
+  background: var(--superficie-2); border: 1px solid var(--borda); cursor: pointer;
+  transition: background .15s, border-color .15s;
+}
+.chave.ligada { background: var(--primaria); border-color: var(--primaria); }
+.chave-bolinha {
+  position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--texto-fraco); transition: left .15s, background .15s;
+}
+.chave.ligada .chave-bolinha { left: 22px; background: #062033; }
+
+/* ---------- linha da mensagem original ---------- */
+/* A linha de dados perde a borda para que ela e a mensagem leiam como um bloco. */
+table.com-raw tbody tr:not(.linha-raw) td { border-bottom: 0; }
+.celula-raw-rotulo { vertical-align: top; white-space: nowrap; }
+.rotulo-raw {
+  font-size: 10.5px; letter-spacing: .06em; color: var(--primaria); margin-bottom: 6px;
+}
+/* Centralizada na altura da pilha rótulo e botão ao lado. */
+.celula-raw { vertical-align: middle; color: #cbd5e1; word-break: break-word; line-height: 1.6; }
+.botao-copiar {
+  font: 500 11px/1 inherit; color: var(--texto-fraco); background: var(--superficie-2);
+  border: 1px solid var(--borda); border-radius: 7px; padding: 5px 9px;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.botao-copiar:hover:not(:disabled) { color: var(--texto); border-color: var(--primaria); }
+.botao-copiar.copiado { color: var(--verde); border-color: rgba(52, 211, 153, .35); }
+
+/* ---------- painel de tendência ---------- */
+.segmentado { display: inline-flex; border: 1px solid var(--borda); border-radius: 9px; overflow: hidden; }
+.segmentado button {
+  background: var(--superficie-2); color: var(--texto-fraco); border: 0; border-radius: 0;
+  padding: 6px 12px; font: 500 12px/1 inherit;
+}
+.segmentado button + button { border-left: 1px solid var(--borda); }
+.segmentado button.ativo { background: var(--primaria); color: #062033; }
+.segmentado button:hover:not(.ativo) { color: var(--texto); }
+
+.painel-grafico { background: var(--superficie-2); border: 1px solid var(--borda);
+  border-radius: 10px; padding: 14px 16px; margin-bottom: 14px; }
+.grafico-topo { display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; flex-wrap: wrap; }
+.painel-grafico h3 { margin: 0; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; }
+.grafico-topo .meta { margin-left: auto; font-size: 12px; }
+/* Dois por linha, cada um com metade da largura do box. */
+.grade-graficos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+@media (max-width: 700px) { .grade-graficos { grid-template-columns: 1fr; } }
+
+.legenda-variaveis, .legenda-condicoes { display: flex; gap: 18px; flex-wrap: wrap;
+  margin-top: 10px; font-size: 12.5px; color: var(--texto-fraco); }
+.legenda-variaveis span, .legenda-condicoes span { display: inline-flex; align-items: center; gap: 7px; }
+.legenda-variaveis i { width: 14px; height: 3px; border-radius: 2px; }
+.legenda-condicoes i { width: 14px; height: 10px; border-radius: 3px; opacity: .55; }
+.legenda-condicoes { margin-top: 4px; padding-top: 10px; border-top: 1px solid var(--borda); }
+.legenda-condicoes-rotulo { color: var(--texto-fraco); }
+
+/* ---------- tabela ---------- */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { text-align: left; color: var(--texto-fraco); font-weight: 600; font-size: 11.5px;
+  text-transform: uppercase; letter-spacing: 0.05em; padding: 8px 10px; border-bottom: 1px solid var(--borda); }
+td { padding: 9px 10px; border-bottom: 1px solid rgba(38, 51, 77, 0.5); }
+tr:last-child td { border-bottom: 0; }
+.mono { font-family: 'Consolas', ui-monospace, monospace; font-size: 12px; color: var(--texto-fraco); }
+
+/* ---------- diversos ---------- */
+.vazio { text-align: center; padding: 34px 16px; color: var(--texto-fraco); }
+.vazio .icone { font-size: 34px; opacity: .5; display: block; margin-bottom: 8px; }
+
+/* Barra indeterminada, "em andamento". */
+.barra-progresso {
+  width: min(100%, 320px); height: 6px; border-radius: 999px; margin: 14px auto 0;
+  background: var(--superficie-2); overflow: hidden;
+}
+.barra-progresso-preenchimento {
+  height: 100%; width: 30%; border-radius: 999px; background: var(--primaria);
+  animation: deslizar-progresso 3.2s cubic-bezier(.45, 0, .55, 1) infinite alternate;
+}
+@keyframes deslizar-progresso {
+  0%, 8%     { transform: translateX(-100%); }
+  92%, 100%  { transform: translateX(285%); }
+}
+.paginacao { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 16px; }
+.filtros { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* ---------- diálogo de confirmação ---------- */
+.fundo-modal {
+  position: fixed; inset: 0; background: rgba(2, 6, 16, 0.72);
+  display: grid; place-items: center; z-index: 60; padding: 20px;
+  animation: surgir .14s ease-out;
+}
+.modal {
+  background: var(--superficie); border: 1px solid var(--borda); border-radius: 14px;
+  padding: 24px; max-width: 440px; width: 100%; box-shadow: 0 24px 60px rgba(0,0,0,.5);
+  animation: entrar .18s ease-out;
+}
+.modal h3 { margin: 0 0 10px; font-size: 18px; }
+.modal p { margin: 0 0 22px; color: var(--texto-fraco); font-size: 14px; }
+.modal-acoes { display: flex; gap: 10px; justify-content: flex-end; }
+button.perigo-solido { background: var(--vermelho); color: #2a0808; }
+@keyframes surgir { from { opacity: 0; } to { opacity: 1; } }
+
+.toasts { position: fixed; right: 18px; bottom: 18px; display: grid; gap: 10px; z-index: 50; }
+.toast {
+  background: var(--superficie-2); border: 1px solid var(--borda); border-left: 4px solid var(--primaria);
+  padding: 12px 16px; border-radius: 10px; box-shadow: var(--sombra); min-width: 260px;
+  animation: entrar .22s ease-out;
+}
+.toast.sucesso { border-left-color: var(--verde); }
+.toast.erro { border-left-color: var(--vermelho); }
+@keyframes entrar { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.carregando { display: inline-block; width: 14px; height: 14px; border: 2px solid var(--borda);
+  border-top-color: var(--primaria); border-radius: 50%; animation: girar .7s linear infinite; }
+@keyframes girar { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
