@@ -63,7 +63,7 @@ com testes de unidade para as regras de negócio, sem misturar entradas e saída
 
 - **Docker Desktop** com Docker Compose v2
 - **API do SkyRoute** em <http://localhost:8010> — siga o README do
-  [MVP-IV-Back-end](https://github.com/digofd/Minha-API-MVP-IV)
+  [Minha-API-MVP-IV](https://github.com/digofd/Minha-API-MVP-IV)
 - Para desenvolvimento fora do container: **Node**
 
 ### 1. Subir a interface
