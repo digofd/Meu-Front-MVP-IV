@@ -9,7 +9,7 @@ dos aeródromos de origem e destino de cada rota segundo os mínimos VMC da **IC
 A pergunta que o sistema responde é simples: **As condições nos aeródromos desta rota estão dentro dos mínimos para voo VFR?**
 
 > Este repositório contém a **interface**. Ela consome a API do repositório
-> **[MVP-IV-Back-end](https://github.com/digofd/MVP-IV-Back-end)**
+> **[Minha-API-MVP-IV](https://github.com/digofd/Minha-API-MVP-IV)**
 
 ![Interface do SkyRoute](docs/interface.png)
 
@@ -35,9 +35,9 @@ Cada componente roda em seu próprio container, e cada um dos dois componentes i
 | Componente | Tecnologia | Porta no host | Repositório |
 |---|---|---|---|
 | **Interface** | React 18 + Vite, servida por nginx | `8020` | este |
-| **API** | FastAPI + SQLAlchemy assíncrono + APScheduler | `8010` | [MVP-IV-Back-end](https://github.com/digofd/MVP-IV-Back-end) |
-| **Banco operacional** | PostgreSQL 14 | `5433` | MVP-IV-Back-end |
-| **Banco de histórico** | PostgreSQL 14 — 15 dias de série | `5434` | MVP-IV-Back-end |
+| **API** | FastAPI + SQLAlchemy assíncrono + APScheduler | `8010` | [Minha-API-MVP-IV](https://github.com/digofd/Minha-API-MVP-IV) |
+| **Banco operacional** | PostgreSQL 14 | `5433` | Minha-API-MVP-IV |
+| **Banco de histórico** | PostgreSQL 14 — 15 dias de série | `5434` | Minha-API-MVP-IV |
 | **API Externas** | REDEMET e AISWEB / DECEA | — | consumidos pela API |
 
 **Comunicação:** a interface fala **somente com a API do SkyRoute**, por REST com JSON sobre HTTP
@@ -63,13 +63,13 @@ com testes de unidade para as regras de negócio, sem misturar entradas e saída
 
 - **Docker Desktop** com Docker Compose v2
 - **API do SkyRoute** em <http://localhost:8010> — siga o README do
-  [MVP-IV-Back-end](https://github.com/digofd/MVP-IV-Back-end)
+  [MVP-IV-Back-end](https://github.com/digofd/Minha-API-MVP-IV)
 - Para desenvolvimento fora do container: **Node**
 
 ### 1. Subir a interface
 
 ```bash
-git clone https://github.com/digofd/MVP-IV-Front-end.git
+git clone https://github.com/digofd/Meu-Front-MVP-IV.git
 cd MVP-IV-Front-end
 docker compose up -d --build
 ```
