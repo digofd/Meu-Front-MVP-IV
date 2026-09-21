@@ -70,7 +70,7 @@ com testes de unidade para as regras de negócio, sem misturar entradas e saída
 
 ```bash
 git clone https://github.com/digofd/Meu-Front-MVP-IV.git
-cd MVP-IV-Front-end
+cd Meu-Front-MVP-IV
 docker compose up -d --build
 ```
 
@@ -172,7 +172,7 @@ ferramentas do navegador (F12) na aba **Rede/Network**, filtrando por `8010`.
 ## Estrutura do repositório
 
 ```
-MVP-IV-Front-end/
+Meu-Front-MVP-IV/
 ├── docs/
 │   ├── arquitetura.svg / .png      fluxograma da arquitetura
 │   └── interface.png               captura da interface
